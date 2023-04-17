@@ -7,6 +7,18 @@ function start()
     recognition.start();
 } 
 
+recognition.onresult = function (event) {
+    console.log(event);
+
+    var Content = event.results[0][0].transcript;
+    console.log(Content);
+
+    if(Content == "Selfie.")
+    {
+        console.log("taking selfie ---");
+        speak();
+    }
+}
 
 camera = document.getElementById("camera");
 Webcam.set({
@@ -26,7 +38,6 @@ function speak(){
 
     setTimeout(function()
     {
-        var synth = window.speechSynthesis;
         img_id = "selfie1";
         take_snapshot();
         speak_data = "Taking your selfie in 5 seconds";
@@ -36,7 +47,6 @@ function speak(){
     
     setTimeout(function()
     {
-        var synth = window.speechSynthesis;
         img_id = "selfie2";
         take_snapshot();
         speak_data = "Taking your selfie in 5 seconds";
@@ -46,7 +56,6 @@ function speak(){
     
     setTimeout(function()
     {
-        var synth = window.speechSynthesis;
         img_id = "selfie3";
         take_snapshot();
         speak_data = "Taking your selfie in 5 seconds";
@@ -62,15 +71,15 @@ function take_snapshot()
 
     Webcam.snap(function(data_uri) {
         if(img_id=="selfie1"){
-            document.getElementsById("result1").innerHTML = '<img id="selfie1" src="'+data_uri+'"/>'
+            document.getElementById("result1").innerHTML = '<img id="selfie1" src="'+data_uri+'"/>'
         }
 
         if(img_id=="selfie2"){
-            document.getElementsById("result2").innerHTML = '<img id="selfie2" src="'+data_uri+'"/>'
+            document.getElementById("result2").innerHTML = '<img id="selfie2" src="'+data_uri+'"/>'
         }
 
         if(img_id=="selfie3"){
-            document.getElementsById("result3").innerHTML = '<img id="selfie3" src="'+data_uri+'"/>'
+            document.getElementById("result3").innerHTML = '<img id="selfie3" src="'+data_uri+'"/>'
         }
     });
 }
